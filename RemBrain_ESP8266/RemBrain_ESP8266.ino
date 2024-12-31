@@ -117,35 +117,6 @@ SerialInterface TheSerialInterface(&TheApp, NUM_PROFILES);
 // Interface to our buttons
 AnalogKeypad TheKeypad;
 
-/*
-const char string00[] = { "Run/Stop" };
-const char string01[] = { "Screen Colr" };
-const char string02[] = { "Text Colr" };
-const char string03[] = { "Repeats" };
-const char string04[] = { "Start Delay" };
-const char string05[] = { "Shutter Open" };
-const char string06[] = { "Shutter Cls" };
-const char string07[] = { "Low Power Mode" };
-const char string08[] = { "Battery Voltage" };
-*/
-
-// Was this - PROGMEM char* const LCDStringTable[LCD_TABLE_ITEMS] =
-/*
- @@@ This shouldn't be required. Left over from when these strings were stored in flash - need to clean up LCDItemBase.cpp and hpp   */
-/*char* LCDStringTable[] =  // 16 is number of characters in one row of LCD display @@@ 
-  {
-    (char*)string00,
-    (char*)string01,
-    (char*)string02,
-    (char*)string03,
-    (char*)string04,
-    (char*)string05,
-    (char*)string06,
-    (char*)string07,
-    (char*)string08
-  }; 
-*/
-
 // Create LCD items to control the application
 LCDRunStopItem LCDRunStop(&TheLCD, "Run/Stop", &TheApp);
 
@@ -218,15 +189,6 @@ void ServiceInputs(void)
 {
   static unsigned char oldButtons = 0x00;
   
-  /*
-    // Service buttons
-    unsigned char buttons = ReadButtons();
-    
-    // Valid presses are those that are in buttons but not in old buttons
-    unsigned char newPresses = buttons & ~oldButtons;
-    oldButtons = buttons;
-    */
-
     char keyPress = TheKeypad.GetKey();
 
     // Do this first as the most common situation is no key press
@@ -255,36 +217,14 @@ void ServiceInputs(void)
     }
     else if (keyPress == KeypadBase::KEYPAD_OTHER)
     {
-      // No function defined for this key yet
+      TheApp.ToggleRunStopState();
     }
     else
     {
       Serial.println ("Unknown key !!");
     }
-    
-    /*
-    if (newPresses & BUTTON_UP) 
-    {
-      TheMenu.OnUp();
-    }
-    else if (newPresses & BUTTON_DOWN) 
-    {
-      TheMenu.OnDown();
-    }
-    else if (newPresses & BUTTON_LEFT) 
-    {
-      TheMenu.OnLeft();
-    }
-    else if (newPresses & BUTTON_RIGHT) 
-    {
-      TheMenu.OnRight();
-    }
-    else if (newPresses & BUTTON_SELECT) 
-    {
-      TheMenu.OnEnter();
-    }
-*/
 
+ 
    // Next service the serial port. It is conceivable that buttons will be pressed at the same time as a serial command is issued.
    // If this happens, the buttons will be processed first followed by the serial commands.
    ServiceSerialInterface();
@@ -306,9 +246,6 @@ void setup()
   WiFi.forceSleepBegin();
   delay( 1 );  // CPU give up to allow the above to take effect
   #endif
-
-  // Programmaable button on side of case
-  //pinMode(SIDE_BUTTON_PIN, INPUT);
 
   TheLCD.initR(INITR_BLACKTAB);
   TheLCD.fillScreen(TheApp.GetBackgroundColourHW());
@@ -350,19 +287,6 @@ void loop() {
   //Serial.println(analogRead(A0));
 
   unsigned long endTime = millis();
-
-/*
-  // Something in the startup code after Setup() is setting SIDE_BUTTON_PIN to be an output, so change it here
-  static int firstpass = 1;
-  if (firstpass)
-  {
-    pinMode(SIDE_BUTTON_PIN, INPUT);
-    firstpass = 0;
-  }
-  */
-
-  //int button = digitalRead(SIDE_BUTTON_PIN);
-  //if (button) Serial.printf ("One %d\n", button); else Serial.printf ("Zero %d\n", button);
 
   // And wait for the next time
   if ((endTime - startTime) < UPDATE_INTERVAL)
