@@ -99,6 +99,11 @@ public:
 	// Stop running the current profile. If it's not running, nothing is
 	// done.
 	virtual void Stop (void);
+	
+	// Toggle the current state - Run -> Stop and Stop -> run. This feature
+	// allows for a single button press to stop or start.
+	void ToggleRunStopState (void);	
+
 		
 	// Called by main loop to update us - specifically so LEDs can be updated
 	virtual void Update (void);

@@ -30,7 +30,6 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <EEPROM.h>
 #include <LCD_Colour_Defs.h>
 
-//#include <LCDBacklightColourItem.h>  @@@
 	
 // --------------------------------------------------------------------------- 
 //Set our default configuration in case EEPROM is un-initialized or
@@ -40,7 +39,6 @@ void LCDApplication::SetDefaultConfiguration (void)
 	  LCDAppConfig.VersionNumber = 1;
 	  LCDAppConfig.BackgroundColour = LCD_COLOUR_INDEX_BLACK;
 	  LCDAppConfig.ForegroundColour = LCD_COLOUR_INDEX_RED;
-//	  LCDAppConfig.LowPowerMode = false; 
 	  
 	  LCDAppConfig.Spare[0] = 0;
 	  LCDAppConfig.Spare[1] = 0;
@@ -77,8 +75,6 @@ LCDApplication::LCDApplication (
 // --------------------------------------------------------------------------- 
 void LCDApplication::SetBackgroundColour (char theColour)
 {
-		// @@@ have to make sure it's not the same as foreground
-
 	LCDAppConfig.BackgroundColour = theColour;
 	WriteConfiguration();
 }
@@ -118,23 +114,6 @@ short LCDApplication::GetBackgroundColourHW(void)
 		return (LCDColourSettings[LCDAppConfig.BackgroundColour]);		
 }
 
-// --------------------------------------------------------------------------- 
-// Run the current profile. If it is already running, it is stoppped and
-// restarted
-void LCDApplication::Run (void)
-{
-	ApplicationBase::Run();
-}
-	
-// --------------------------------------------------------------------------- 
-// Stop running the current profile. If it's not running, nothing is
-// done.
-void LCDApplication::Stop (void)
-{
-	ApplicationBase::Stop();
-	
-}
-	
 // --------------------------------------------------------------------------- 
 // Called by main loop to update us
 void LCDApplication::Update (void)

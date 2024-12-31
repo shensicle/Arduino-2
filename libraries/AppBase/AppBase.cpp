@@ -144,6 +144,17 @@ void ApplicationBase::Stop (void)
 }
 	
 // --------------------------------------------------------------------------- 
+// Toggle the current state - Run -> Stop and Stop -> run. This feature
+// allows for a single button press to stop or start.
+void ApplicationBase::ToggleRunStopState (void)
+{
+	if (IsRunning)
+		Stop();
+	else
+		Run();
+}	
+
+// --------------------------------------------------------------------------- 
 // Called by main loop to update us - specifically so LEDs can be updated
 void ApplicationBase::Update (void)
 {

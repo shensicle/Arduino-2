@@ -31,15 +31,11 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #include <Arduino.h>
-// #include <Adafruit_MCP23017.h>
-// #include <Adafruit_RGBLCDShield.h>
 
 #include <ProfileBase.h>
 #include <AppBase.h>
 #include <shen_LCD.h>
 
-
-//#include <LCDItemBase.h>
 
 class LCDApplication : public ApplicationBase
 {
@@ -83,15 +79,7 @@ public:
 	// Return the hardware setting value for the current foreground and background colours
 	short GetForegroundColourHW (void);
 	short GetBackgroundColourHW(void);
-		
-	// Run the current profile. If it is already running, it is stoppped and
-	// restarted
-	virtual void Run (void);
-	
-	// Stop running the current profile. If it's not running, nothing is
-	// done.
-	virtual void Stop (void);	
-	
+				
 	// Called by main loop to update us, mostly so the LCD display gets 
 	// updated
 	virtual void Update (void);
