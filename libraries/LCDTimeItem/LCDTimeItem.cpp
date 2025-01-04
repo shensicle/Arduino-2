@@ -1,5 +1,5 @@
 /*
-Copyright � 2012 Scott Henwood/shensicle photographic. All Rights Reserved.
+Copyright � 2024 Scott Henwood/shensicle photographic. All Rights Reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -27,7 +27,6 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #include <LCDTimeItem.h>
-
 #include <Arduino.h>	
 
 // Some formatting defines used to display the time on the LCD in the correct
@@ -48,9 +47,9 @@ void LCDTimeItem::TimeToString (char* theString, unsigned long theTime)
 	unsigned long tempWhole = wholeSeconds / 10000;  // get first digit
 
         snprintf (theString, 
-        	  2, // +1 for the null terminator 
-        	  "%01u",
-        	  tempWhole);
+        	      2, // +1 for the null terminator 
+        	      "%01u",
+        	      tempWhole);
         tempWhole = wholeSeconds - (tempWhole*10000);
         
 	// If you change the #define for WHOLE_SECONDS_DIGITS, make sure to change
@@ -58,18 +57,18 @@ void LCDTimeItem::TimeToString (char* theString, unsigned long theTime)
 	// Arduino library does not support the "%0*d" format specifier for 
 	// snprintf(), so the define cannot be included directly.
         snprintf (&theString[1], 
-        	  WHOLE_SECONDS_DIGITS,  
-        	  "%04u",
-        	  tempWhole);
+        	      WHOLE_SECONDS_DIGITS,  
+        	      "%04u",
+        	      tempWhole);
     
 	// If you change the #define for FRACTIONAL_SECONDS_DIGITS, make sure to change
 	// the format specifier (originally "%02d") below. Unfortunately the
 	// Arduino library does not support the "%0*d" format specifier for 
 	// snprintf(), so the define cannot be included directly.
         snprintf (&theString[WHOLE_SECONDS_DIGITS], 
-    	      FRACTIONAL_SECONDS_DIGITS+2,  // +1 for the null terminator and +1 for the "."
-    	      ".%02u", 
-    	      fractionalSeconds);
+    	          FRACTIONAL_SECONDS_DIGITS+2,  // +1 for the null terminator and +1 for the "."
+    	          ".%02u", 
+    	          fractionalSeconds);
 }
 	
 
@@ -211,8 +210,6 @@ void LCDTimeItem::OnEnter (void)
 	// Update the value from the editor string.
 	StringToTime (TheString, &TheValue);
 
-	
-//	TheLCD->noCursor(); // @@@
 	LCDItemBase::OnEnter();
 }
 

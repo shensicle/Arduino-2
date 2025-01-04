@@ -57,7 +57,8 @@ LCDApplication::LCDApplication (
                          (char*)&LCDAppConfig,
                          sizeof(LCDAppConfig),
                          supportedProfiles, 
-                         programList)
+                         programList), 
+        Adafruit_ST7735 (chipSelect,dc,reset)
 {
 	  // Read application configuration settings from EEPROM  
 	  if (ReadConfiguration() == -1)
@@ -66,9 +67,6 @@ LCDApplication::LCDApplication (
 	  	  SetDefaultConfiguration();
 	  	  WriteConfiguration();
 	  }
-	  	  	  
-	  // Save a pointer to the LCD display
-	  TheLCD = theLCD;
 }
 
 // --------------------------------------------------------------------------- 

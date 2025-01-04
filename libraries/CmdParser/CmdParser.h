@@ -2,7 +2,7 @@
 #define _CMD_PARSER_H
 
 /*
-Copyright © 2011 Scott Henwood/shensicle photographic. All Rights Reserved.
+Copyright ï¿½ 2011 Scott Henwood/shensicle photographic. All Rights Reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -35,7 +35,7 @@ class CmdParser
 {
 protected:
 
-	//Pointer to the string we're parsing
+	// Pointer to the string we're parsing
 	String* StringPtr;
 	
 	//Storage for the current position in the string
@@ -43,6 +43,7 @@ protected:
 	
 	//Skip whitespace in the string
 	void SkipWhitespace (void);
+	
 public:
 
 	// Constructor - pass in string

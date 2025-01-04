@@ -2,7 +2,7 @@
 #define _TIMEDPROFILE_H
 
 /*
-Copyright © 2011 Scott Henwood/shensicle photographic. All Rights Reserved.
+Copyright ï¿½ 2011 Scott Henwood/shensicle photographic. All Rights Reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -86,10 +86,10 @@ public:
 	void SetShutterClosedInterval (unsigned long theInterval);
 	
 	// Get configuration items individually
-	unsigned long GetRepeats (void) { return (Configuration.Repeats); }
-	unsigned long GetStartupDelay (void) { return (Configuration.StartupDelay); }
-	unsigned long GetShutterOpenInterval (void) { return (Configuration.ShutterOpenInterval); }
-	unsigned long GetShutterClosedInterval (void) { return (Configuration.ShutterClosedInterval); }
+	unsigned long inline GetRepeats (void) { return (Configuration.Repeats); }
+	unsigned long inline GetStartupDelay (void) { return (Configuration.StartupDelay); }
+	unsigned long inline GetShutterOpenInterval (void) { return (Configuration.ShutterOpenInterval); }
+	unsigned long inline GetShutterClosedInterval (void) { return (Configuration.ShutterClosedInterval); }
 	
 	// Write the configuration in human readable format to the
 	// serial port

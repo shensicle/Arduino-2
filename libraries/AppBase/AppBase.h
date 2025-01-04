@@ -2,7 +2,7 @@
 #define _APPBASE_H
 
 /*
-Copyright � 2011 Scott Henwood/shensicle photographic. All Rights Reserved.
+Copyright � 2024 Scott Henwood/shensicle photographic. All Rights Reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -54,8 +54,8 @@ protected:
 	unsigned short ConfigurationOffset;
 	
 	// Pointer to the configuration structure. This is passed in by derived
-	// classes as they are responsible for allocating the space.The last byte of this
-	// structure must be reserved to store a checksum.
+	// classes as they are responsible for allocating the space.The last byte of this 
+	//structure must be reserved to store a checksum.
 	char* ConfigurationPtr;
 	
 	// The number of bytes in the structure pointed to by ConfigurationPtr;
@@ -82,15 +82,15 @@ public:
 		);
 	
 	// Make the specified profile current. If application is running, it is
-	// stopped
+	// stopped.
 	virtual void SetCurrentProfile (unsigned short theProfile);
 	
 	// Return the index of the current profile; first one is 0.
-	unsigned short GetCurrentProfile (void)
-	{ return (CurrentProfile); }
+	unsigned short inline GetCurrentProfile (void)
+	  { return (CurrentProfile); }
 	
 	// Returns a flag which, when set, indicates we are runnig
-	bool ProfileIsRunning (void) { return (IsRunning); }
+	bool inline ProfileIsRunning (void) { return (IsRunning); }
 	
 	// Run the current profile. If it is already running, it is stoppped and
 	// restarted

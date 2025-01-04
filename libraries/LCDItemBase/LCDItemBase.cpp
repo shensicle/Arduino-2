@@ -71,8 +71,8 @@ int LCDItemBase::RenderLineRightJustified (char* theString, unsigned short lineN
 // and trailing blanks are added as necessary. Parameter is a 
 // null-terminated string.Line number defaults to 0 (ie. the first line).
 // Returns the display column (starting at 0) of the first character in the string.
-int LCDItemBase::RenderLineCenterJustified (char* theString, 
-	   	                             unsigned short lineNum)
+int LCDItemBase::RenderLineCenterJustified (char*          theString, 
+	   	                                    unsigned short lineNum)
 {
 	// Storage for the output string. The "+1" gives us a place to store
 	// the null terminator.
@@ -117,9 +117,9 @@ int LCDItemBase::RenderLineCenterJustified (char* theString,
 
 // --------------------------------------------------------------
 // Constructor
-LCDItemBase::LCDItemBase (shen_LCD*      theLCD,
-		   				  char*  		 theLabel,
-		     			  LCDApplication* theApp)
+LCDItemBase::LCDItemBase (shen_LCD*            theLCD,
+		   				  char*  	           theLabel,
+		     			  LCDApplication*      theApp)
 {
 	
 	IsInEditMode = IsInErrorMode = false;

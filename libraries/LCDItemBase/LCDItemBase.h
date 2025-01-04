@@ -1,20 +1,44 @@
 #ifndef _LCDITEMBASE_H
 #define _LCDITEMBASE_H
 
+/*
+Copyright  2024 Scott Henwood/shensicle photographic. All Rights Reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, 
+   this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, 
+   this list of conditions and the following disclaimer in the documentation 
+   and/or other materials provided with the distribution.
+
+3. The name of the author may not be used to endorse or promote products 
+   derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY Scott Henwood/shensicle photographic "AS IS" AND 
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, 
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
+EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+// @@@ is this defined elsewhere??
 #define MAX_LCD_COLUMNS 12  // This should be used in constructors of derived classes for default values
-#define MAX_LCD_MENUS   9       // might no need this  @@@
 
 // Make it easier to support LCD modules from different manufacturers
 #include <Wire.h>
-//#include <Adafruit_MCP23017.h>
-//#include <Adafruit_RGBLCDShield.h>
 
 #include <shen_LCD.h>
-#include <LCDApp.h>
 
-#ifndef ESP8266
-//typedef  Adafruit_RGBLCDShield shen_LCD;    // Need this for Arduino version 
-#endif
+// @@@ 
+#include <LCDApp.h>
 
 // LCD Row and column starts for text display
 #define LCD_DEFAULT_TEXT_SIZE 2
@@ -27,20 +51,20 @@
 #define LCD_TEXT_ROW_4 105
 
 // Number of pixels between the bottom of a row of text and the cursor
- #define LCD_CURSOR_GAP 2
+#define LCD_CURSOR_GAP 2
 
 // This is hard-coded for a text size of 3 - should probably be in LCDApp @@@
- #define LCD_CHAR_WIDTH_PIXELS 12
- #define LCD_CHAR_HEIGHT_PIXELS 16
- #define LCD_DISPLAY_WIDTH_PIXELS 160 - LCD_TEXT_COLUMN
- #define LCD_DISPLAY_HEIGHT_PIXELS 120
+#define LCD_CHAR_WIDTH_PIXELS 12
+#define LCD_CHAR_HEIGHT_PIXELS 16
+#define LCD_DISPLAY_WIDTH_PIXELS 160 - LCD_TEXT_COLUMN
+#define LCD_DISPLAY_HEIGHT_PIXELS 120
 
 const unsigned LCDRowOffsets[] = {LCD_TEXT_ROW_1, 
                                   LCD_TEXT_ROW_2, 
                                   LCD_TEXT_ROW_3,
                                   LCD_TEXT_ROW_4};
                                   
-
+// ==================================================================
 class LCDItemBase
 {
 protected:
@@ -103,9 +127,9 @@ protected:
 	
 public:
 	// Constructor
-	LCDItemBase (shen_LCD*  theLCD,
-		     char*  theLabel, // Offset of label in LCDStringTable 
-		     LCDApplication* theApp);
+	LCDItemBase (shen_LCD*            theLCD,
+		         char*                theLabel,
+		         LCDApplication*      theApp);
 	
 	// Handle a left button press. This should only be called when we are
 	// in edit mode.

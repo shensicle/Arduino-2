@@ -2,7 +2,7 @@
 #define _SERIALINTERFACE_H
 
 /*
-Copyright © 2011 Scott Henwood/shensicle photographic. All Rights Reserved.
+Copyright ï¿½ 2011 Scott Henwood/shensicle photographic. All Rights Reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -33,6 +33,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <CmdParser.h>
 #include <AppBase.h>
 
+// =======================================================================
 class SerialInterface
 {
 protected:

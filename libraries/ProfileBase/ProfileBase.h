@@ -2,7 +2,7 @@
 #define _PROFILEBASE_H
 
 /*
-Copyright © 2011 Scott Henwood/shensicle photographic. All Rights Reserved.
+Copyright ï¿½ 2012 Scott Henwood/shensicle photographic. All Rights Reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -53,8 +53,8 @@ protected:
 	
 public:
 	ProfileBase (TwoStateOutput* theRelay,
-		     unsigned short  offsetInEEPROM,
-		     unsigned long    updateInterval);
+		         unsigned short  offsetInEEPROM,
+		         unsigned long   updateInterval);
 	
 	// Set the configuration from the string passed in. Returns 0
 	// if configuration is valid. If configuration is not valid, original

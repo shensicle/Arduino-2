@@ -49,7 +49,6 @@ class AnalogKeypad : public KeypadBase
 	char LastRead;
 
   public:
-  
     AnalogKeypad (void) { LastRead = KEYPAD_NOKEY; }
   	
 	// Return the current keypress, if any. Otherwise return KEYPAD_NOKEY

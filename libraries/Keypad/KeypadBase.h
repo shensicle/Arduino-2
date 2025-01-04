@@ -31,7 +31,6 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 class KeypadBase
 {
-	  
   public:
 
     // Key definitions

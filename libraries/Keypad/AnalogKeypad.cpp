@@ -29,11 +29,13 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
   	
- // Return the current keypress, if any. Otherwise return KEYPAD_NOKEY
+// --------------------------------------------------------
+// Return the current keypress, if any. Otherwise return KEYPAD_NOKEY
 char AnalogKeypad::GetKey (void)
  {
    char newRead = KEYPAD_NOKEY;
 
+   // On an ESP826, A0 is the only analog input
    unsigned short analogValue = analogRead(A0);
 
    if (analogValue < KEYPAD_RIGHT_MAX)
@@ -63,7 +65,7 @@ char AnalogKeypad::GetKey (void)
    }
    else if (analogValue < KEYPAD_OTHER_MAX)
    {
-      Serial.printf ("Other %d\n", analogValue);
+      // Serial.printf ("Other %d\n", analogValue);
       newRead = KEYPAD_OTHER;
    }
    else
@@ -76,7 +78,6 @@ char AnalogKeypad::GetKey (void)
    char returnValue = newRead & ~LastRead;
    LastRead = newRead;
 
-  return (returnValue);
-
+   return (returnValue);
  }
 	

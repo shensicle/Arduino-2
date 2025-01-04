@@ -2,7 +2,7 @@
 #define _LCDTIMEITEM_H
 
 /*
-Copyright � 2012 Scott Henwood/shensicle photographic. All Rights Reserved.
+Copyright � 2024 Scott Henwood/shensicle photographic. All Rights Reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -31,6 +31,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <LCDUnsignedItem.h>
 
+// ============================================================================
 class LCDTimeItem : public LCDUnsignedItem
 {
 protected:
@@ -49,12 +50,12 @@ protected:
 	
 public:
 	// Constructor
-	LCDTimeItem (shen_LCD* theLCD, 
-		     char * theLabel, 
-		     LCDApplication* theApp,
-		     unsigned long minValue, 
-		     unsigned long maxValue,
-		     unsigned long charsSupported)
+	LCDTimeItem (shen_LCD*            theLCD, 
+		         char *               theLabel, 
+		         LCDApplication*      theApp,
+		         unsigned long        minValue, 
+		         unsigned long        maxValue,
+		         unsigned long        charsSupported)
 	: LCDUnsignedItem (theLCD, theLabel, theApp, minValue, maxValue, charsSupported) {};
 	
 	// Handle a left button press. This should only be called when we are
