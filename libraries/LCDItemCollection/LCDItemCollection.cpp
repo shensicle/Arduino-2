@@ -22,13 +22,12 @@ void LCDItemCollection::DisplayCurrentValue (void)
 // --------------------------------------------------------------
 // Constructor
 LCDItemCollection::LCDItemCollection (
-	           shen_LCD*      theLCD,
 	           LCDApplication* theApp,
 		       LCDItemBase**  theCollection,
 	           unsigned short itemsInCollection,
 		       char*          theLabel, 
 		       bool		      displayOurself)
-: LCDItemBase (theLCD, theLabel, theApp)
+: LCDItemBase (theLabel, theApp)
 {
 	TheCollection = theCollection;
 	ItemsInCollection = itemsInCollection;

@@ -29,12 +29,8 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <LCDApp.h>
 #include <LCDListItem.h>
-#include <AppBase.h>
-
-// Labels for the various colours available along with their LCD colour codes. Defined in the .ino file
-extern const char*  LCDColourLabels[];
-extern const short  LCDColourSettings[];
 
 // =========================================================================
 class LCDBackgroundColourItem : public LCDListItem
@@ -60,10 +56,9 @@ protected:
 	
 public:
 	// Constructor
-	LCDBackgroundColourItem (shen_LCD*   	 theLCD, 
-		          		     char* 	         theLabel,
+	LCDBackgroundColourItem (char* 	         theLabel,
 		          	         LCDApplication* theApp)
-	: LCDListItem (theLCD, theLabel, theApp, (char**)LCDColourLabels, 8)
+	: LCDListItem (theLabel, theApp, (char**)LCDColourLabels, 8)
 	  { }		
 
 };

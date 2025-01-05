@@ -28,9 +28,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <LCDApp.h>
 #include <EEPROM.h>
-#include <LCD_Colour_Defs.h>
 
-	
 // --------------------------------------------------------------------------- 
 //Set our default configuration in case EEPROM is un-initialized or
 // corrupted.
@@ -52,12 +50,15 @@ LCDApplication::LCDApplication (
 	unsigned short configOffset,
 	unsigned short supportedProfiles,
 	ProfileBase**  programList,
-	shen_LCD*      theLCD
-	) : ApplicationBase (configOffset, 
+    unsigned       chipSelect,
+        unsigned       dc,
+        unsigned       reset)
+	  : ApplicationBase (configOffset, 
                          (char*)&LCDAppConfig,
                          sizeof(LCDAppConfig),
                          supportedProfiles, 
-                         programList)
+                         programList),
+        Adafruit_ST7735 (chipSelect,dc,reset)
 {
 	  // Read application configuration settings from EEPROM  
 	  if (ReadConfiguration() == -1)
@@ -66,9 +67,6 @@ LCDApplication::LCDApplication (
 	  	  SetDefaultConfiguration();
 	  	  WriteConfiguration();
 	  }
-	  	  	  
-	  // Save a pointer to the LCD display
-	  TheLCD = theLCD;
 }
 
 // --------------------------------------------------------------------------- 

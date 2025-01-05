@@ -5,7 +5,7 @@
 // Erase the specified text line by drawing a rectangle in the current background colour
 void LCDItemBase::EraseTextLine (unsigned lineOffset)
 {
-	TheLCD->fillRect(LCD_TEXT_COLUMN, lineOffset, LCD_DISPLAY_WIDTH_PIXELS, LCD_CHAR_HEIGHT_PIXELS, TheApp->GetBackgroundColourHW()); //x orig, y orig, x size, y size
+	TheApp->fillRect(LCD_TEXT_COLUMN, lineOffset, LCD_DISPLAY_WIDTH_PIXELS, LCD_CHAR_HEIGHT_PIXELS, TheApp->GetBackgroundColourHW()); //x orig, y orig, x size, y size
 }
 
 // --------------------------------------------------------------
@@ -58,9 +58,9 @@ int LCDItemBase::RenderLineRightJustified (char* theString, unsigned short lineN
     EraseTextLine (LCDRowOffsets[lineNum+2]);
 
 
-	TheLCD->setCursor (LCD_TEXT_COLUMN, LCDRowOffsets[lineNum+2]); // Line 0 is top line of old LCD; line 3 is top line of new LCD. So lineNum of 1 maps onto 3 and linenum of 2 maps onto 4. But the array starts at 0
-	TheLCD->setTextColor(TheApp->GetForegroundColourHW());
-	TheLCD->print (outputString);
+	TheApp->setCursor (LCD_TEXT_COLUMN, LCDRowOffsets[lineNum+2]); // Line 0 is top line of old LCD; line 3 is top line of new LCD. So lineNum of 1 maps onto 3 and linenum of 2 maps onto 4. But the array starts at 0
+	TheApp->setTextColor(TheApp->GetForegroundColourHW());
+	TheApp->print (outputString);
 	
 	return(i);
 }
@@ -107,24 +107,22 @@ int LCDItemBase::RenderLineCenterJustified (char*          theString,
 
     EraseTextLine (LCDRowOffsets[lineNum+2]);
 
-	TheLCD->setCursor (LCD_TEXT_COLUMN, LCDRowOffsets[lineNum+2]); // Line 0 is top line of old LCD; line 3 is top line of new LCD. So lineNum of 1 maps onto 3 and linenum of 2 maps onto 4. But the array starts at 0
+	TheApp->setCursor (LCD_TEXT_COLUMN, LCDRowOffsets[lineNum+2]); // Line 0 is top line of old LCD; line 3 is top line of new LCD. So lineNum of 1 maps onto 3 and linenum of 2 maps onto 4. But the array starts at 0
 
-	TheLCD->setTextColor(TheApp->GetForegroundColourHW());
-	TheLCD->print (outputString);
+	TheApp->setTextColor(TheApp->GetForegroundColourHW());
+	TheApp->print (outputString);
 
 	return (returnValue);
 }
 
 // --------------------------------------------------------------
 // Constructor
-LCDItemBase::LCDItemBase (shen_LCD*            theLCD,
-		   				  char*  	           theLabel,
+LCDItemBase::LCDItemBase (char*  	           theLabel,
 		     			  LCDApplication*      theApp)
 {
 	
 	IsInEditMode = IsInErrorMode = false;
 
-	TheLCD = theLCD;
 	TheApp = theApp;
 
 	strncpy (TheLabel, theLabel, MAX_LCD_COLUMNS);

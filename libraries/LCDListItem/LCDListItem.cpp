@@ -63,8 +63,8 @@ void LCDListItem::DisplayCurrentValue (void)
 
 // --------------------------------------------------------------------------- 
 // Constructor
-LCDListItem::LCDListItem (shen_LCD* theLCD, char* theLabel, LCDApplication* theApp, char** theList, unsigned short numItems) :
-   LCDItemBase (theLCD, theLabel, theApp)
+LCDListItem::LCDListItem (char* theLabel, LCDApplication* theApp, char** theList, unsigned short numItems) :
+   LCDItemBase (theLabel, theApp)
 {
 	TheList = theList;
 	CurrentItem = 0;

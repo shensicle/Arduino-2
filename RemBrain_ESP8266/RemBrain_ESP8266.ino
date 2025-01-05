@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <arduino.h>
+//#include <arduino.h>
 #include <EEPROM.h>
 #include <SH_EEPROM.h>
 #include <TwoStateOutput.h>
@@ -41,7 +41,6 @@
 
 #include <LCDItemBase.h>
 #include <LCDItemCollection.h>
-#include <shen_LCD.h>
 #include <LCDBackgroundColourItem.h>
 #include <LCDForegroundColourItem.h>
 
@@ -79,8 +78,6 @@
 #define BUTTON_UP      0x08
 #define BUTTON_SELECT  0x0A
 
-
-
 // Make our own eeprom object, which really just sets the size of the system eeprom emulation
 SH_EEPROM EEPROMInitializer;
 
@@ -104,11 +101,11 @@ ProfileBase* ProfileList[NUM_PROFILES] = { &Profile1 };
 // this is Analog 4 and 5 so you can't use those for analogRead() anymore
 // However, you can connect other I2C sensors to the I2C bus and share
 // the I2C bus.
-shen_LCD TheLCD = shen_LCD(TFT_CS, TFT_DC, TFT_RST);
+// shen_LCD TheLCD = shen_LCD(TFT_CS, TFT_DC, TFT_RST);
 
 // Create the object that manages this application
 //static 
-LCDApplication TheApp(CONFIG_OFFSET, NUM_PROFILES, ProfileList, &TheLCD);
+LCDApplication TheApp(CONFIG_OFFSET, NUM_PROFILES, ProfileList, TFT_CS, TFT_DC, TFT_RST);
 
 // Make a serial interface so user can communicate with us from a computer
 //static 
@@ -118,23 +115,23 @@ SerialInterface TheSerialInterface(&TheApp, NUM_PROFILES);
 AnalogKeypad TheKeypad;
 
 // Create LCD items to control the application
-LCDRunStopItem LCDRunStop(&TheLCD, "Run/Stop", &TheApp);
+LCDRunStopItem LCDRunStop("Run/Stop", &TheApp);
 
-LCDBackgroundColourItem LCDBackgroundColour(&TheLCD, "Screen Colr", &TheApp);
-LCDForegroundColourItem LCDForegroundColour(&TheLCD, "Text Colr", &TheApp);
+LCDBackgroundColourItem LCDBackgroundColour("Screen Colr", &TheApp);
+LCDForegroundColourItem LCDForegroundColour("Text Colr", &TheApp);
 
 // Create LCD items to configure each of the programs
-LCDProfileRepeatsItem Profile1Repeats(&TheLCD, "Repeats", &Profile1, &TheApp);
-LCDProfileStartupDelayItem Profile1StartupDelay(&TheLCD, "Start Delay", &Profile1, &TheApp);
-LCDProfileShutterOpenIntervalItem Profile1ShutterOpenInterval(&TheLCD, "Shutter Open", &Profile1, &TheApp);
-LCDProfileShutterClosedIntervalItem Profile1ShutterClosedInterval(&TheLCD, "Shutter Cls", &Profile1, &TheApp);
+LCDProfileRepeatsItem Profile1Repeats("Repeats", &Profile1, &TheApp);
+LCDProfileStartupDelayItem Profile1StartupDelay("Start Delay", &Profile1, &TheApp);
+LCDProfileShutterOpenIntervalItem Profile1ShutterOpenInterval("Shutter Open", &Profile1, &TheApp);
+LCDProfileShutterClosedIntervalItem Profile1ShutterClosedInterval("Shutter Cls", &Profile1, &TheApp);
 
 
 // Create a top-level menu for the LCD
 LCDItemBase* MenuList[] = { &LCDRunStop,
                             &Profile1Repeats, &Profile1StartupDelay, &Profile1ShutterOpenInterval, &Profile1ShutterClosedInterval,
                             &LCDBackgroundColour, &LCDForegroundColour };
-LCDItemCollection TheMenu(&TheLCD, &TheApp, MenuList, 7, "\0", false); // @@@ 3rd param is number of menu items - could be more elegant @@@
+LCDItemCollection TheMenu(&TheApp, MenuList, 7, "\0", false); // @@@ 3rd param is number of menu items - could be more elegant @@@
 
 // ----------------------------------------------------------------------------------------------------------------------------------
 static void ServiceSerialInterface(void) 
@@ -247,22 +244,22 @@ void setup()
   delay( 1 );  // CPU give up to allow the above to take effect
   #endif
 
-  TheLCD.initR(INITR_BLACKTAB);
-  TheLCD.fillScreen(TheApp.GetBackgroundColourHW());
-  TheLCD.setRotation(1);  // Landscape - change 3 to 1 if display is upside down
-  TheLCD.setTextWrap(false);
-  TheLCD.setTextColor(TheApp.GetForegroundColourHW());
-  TheLCD.setTextSize(LCD_DEFAULT_TEXT_SIZE);
+  TheApp.initR(INITR_BLACKTAB);
+  TheApp.fillScreen(TheApp.GetBackgroundColourHW());
+  TheApp.setRotation(1);  // Landscape - change 3 to 1 if display is upside down
+  TheApp.setTextWrap(false);
+  TheApp.setTextColor(TheApp.GetForegroundColourHW());
+  TheApp.setTextSize(LCD_DEFAULT_TEXT_SIZE);
 
   //TheLCD.clear(); // Replace with  TheLCD.fillScreen(ST77XX_BLACK);
-  TheLCD.setCursor(LCD_TEXT_COLUMN, LCD_TEXT_ROW_1);
-  TheLCD.print(F("RemBrain II"));
-  TheLCD.setCursor(LCD_TEXT_COLUMN, LCD_TEXT_ROW_2);
+  TheApp.setCursor(LCD_TEXT_COLUMN, LCD_TEXT_ROW_1);
+  TheApp.print(F("RemBrain II"));
+  TheApp.setCursor(LCD_TEXT_COLUMN, LCD_TEXT_ROW_2);
 
-  TheLCD.setTextSize(1);
-  TheLCD.print(F("       Firmware V1.0"));
+  TheApp.setTextSize(1);
+  TheApp.print(F("       Firmware V1.0"));
 
-  TheLCD.setTextSize(LCD_DEFAULT_TEXT_SIZE);
+  TheApp.setTextSize(LCD_DEFAULT_TEXT_SIZE);
 
   TheMenu.OnEntry();
 }

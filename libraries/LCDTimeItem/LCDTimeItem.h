@@ -50,13 +50,12 @@ protected:
 	
 public:
 	// Constructor
-	LCDTimeItem (shen_LCD*            theLCD, 
-		         char *               theLabel, 
+	LCDTimeItem (char *               theLabel, 
 		         LCDApplication*      theApp,
 		         unsigned long        minValue, 
 		         unsigned long        maxValue,
 		         unsigned long        charsSupported)
-	: LCDUnsignedItem (theLCD, theLabel, theApp, minValue, maxValue, charsSupported) {};
+	: LCDUnsignedItem (theLabel, theApp, minValue, maxValue, charsSupported) {};
 	
 	// Handle a left button press. This should only be called when we are
 	// in edit mode. This button moves to the left (with wrap-around) so

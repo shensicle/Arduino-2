@@ -55,10 +55,9 @@ protected:
 	
 public:
 	// Constructor
-	LCDCurrentProfileItem (shen_LCD*       theLCD, 
-		               	   char*           theLabel,
-		                   LCDApplication* theApp)
-	: LCDListItem (theLCD, theLabel, theApp, Labels, 3) {}		
+	LCDCurrentProfileItem ( char*           theLabel,
+		                    LCDApplication* theApp)
+	: LCDListItem (theLabel, theApp, Labels, 3) {}		
 
 };
 

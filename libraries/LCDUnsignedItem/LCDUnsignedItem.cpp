@@ -38,14 +38,14 @@ void LCDUnsignedItem::CursorOn (void)
 	CursorOff();
 	
 	// Draw a line 
-	TheLCD->drawFastHLine (CharXPosPixels(), LCD_TEXT_ROW_4+LCD_CHAR_HEIGHT_PIXELS+LCD_CURSOR_GAP, LCD_CHAR_WIDTH_PIXELS, TheApp->GetForegroundColourHW());
+	TheApp->drawFastHLine (CharXPosPixels(), LCD_TEXT_ROW_4+LCD_CHAR_HEIGHT_PIXELS+LCD_CURSOR_GAP, LCD_CHAR_WIDTH_PIXELS, TheApp->GetForegroundColourHW());
 }
 	
 // --------------------------------------------------------------------------- 
 // Turn the cursor off. Current bruit-force method is to clear the entire cursor area
 void LCDUnsignedItem::CursorOff (void)
 {
-	TheLCD->fillRect(0, LCD_TEXT_ROW_4+LCD_CHAR_HEIGHT_PIXELS+LCD_CURSOR_GAP, 160, 2, TheApp->GetBackgroundColourHW());
+	TheApp->fillRect(0, LCD_TEXT_ROW_4+LCD_CHAR_HEIGHT_PIXELS+LCD_CURSOR_GAP, 160, 2, TheApp->GetBackgroundColourHW());
 }
 
 // --------------------------------------------------------------------------- 
@@ -55,9 +55,9 @@ void LCDUnsignedItem::SetCharacter (char theChar)
 	// Erase the current character
 	int x = CharXPosPixels();
 	
-	TheLCD->fillRect (x, LCD_TEXT_ROW_4, LCD_CHAR_WIDTH_PIXELS, LCD_CHAR_HEIGHT_PIXELS, TheApp->GetBackgroundColourHW());
-	TheLCD->setCursor (CharXPosPixels(), LCD_TEXT_ROW_4);
-	TheLCD->print (theChar);
+	TheApp->fillRect (x, LCD_TEXT_ROW_4, LCD_CHAR_WIDTH_PIXELS, LCD_CHAR_HEIGHT_PIXELS, TheApp->GetBackgroundColourHW());
+	TheApp->setCursor (CharXPosPixels(), LCD_TEXT_ROW_4);
+	TheApp->print (theChar);
 }
 
 // --------------------------------------------------------------------------- 

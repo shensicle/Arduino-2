@@ -92,13 +92,12 @@ protected:
 		
 public:
 	// Constructor
-	LCDUnsignedItem  (shen_LCD*            theLCD,
-		          	  char*  	           theLabel, 
+	LCDUnsignedItem  (char*  	           theLabel, 
 		              LCDApplication*      theApp,
 		              unsigned long        minValue, 
 		              unsigned long        maxValue,
 		              unsigned char        numChars)
-	   : LCDItemBase (theLCD, theLabel, theApp) 
+	   : LCDItemBase (theLabel, theApp) 
 	      { MinValue = minValue; MaxValue = maxValue; NumColumns = numChars;} 
 	
 	// Handle a left button press. This should only be called when we are

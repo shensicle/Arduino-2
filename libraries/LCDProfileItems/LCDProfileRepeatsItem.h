@@ -52,12 +52,10 @@ protected:
 		
 public:
 	// Constructor
-	LCDProfileRepeatsItem (shen_LCD*        theLCD,
-		               char*                theLabel,
-		               TimedProfile*        theProfile,
-		               LCDApplication*      theApp)
-	: LCDUnsignedItem  (theLCD,
-		                theLabel,
+	LCDProfileRepeatsItem (char*                theLabel,
+		                   TimedProfile*        theProfile,
+		                   LCDApplication*      theApp)
+	: LCDUnsignedItem  (theLabel,
                         theApp,
 		                1,    // min value 
 		                1000, // max value

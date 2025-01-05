@@ -31,12 +31,32 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <Arduino.h>
 
+// For graphical LCD display
+#include <Adafruit_GFX.h>     // Core graphics library
+#include <Adafruit_ST7735.h>  // Hardware-specific library for ST7735
+//#include <Adafruit_ST7789.h>  // Hardware-specific library for ST7789
+#include <SPI.h>
+
 #include <ProfileBase.h>
 #include <AppBase.h>
-#include <shen_LCD.h>
+
+// These are the colours that the LCD foreground and background can be set to
+static const char* LCDColourLabels[] = {"Black", "White", "Red", "Green", "Blue", "Cyan", "Magenta", "Yellow", "Orange" };
+static const short  LCDColourSettings[] = {ST77XX_BLACK , ST77XX_WHITE, ST77XX_RED, ST77XX_GREEN, ST77XX_BLUE, ST77XX_CYAN, ST77XX_MAGENTA, ST77XX_YELLOW, ST77XX_ORANGE };
+
+// These are the indices of the colours that the LCD foreground and background can be set to. Must match LCDColourLabels and LCDColourSettings define in ino file @@@ Clean up, this is crap
+#define LCD_COLOUR_INDEX_BLACK   0
+#define LCD_COLOUR_INDEX_WHITE   1
+#define LCD_COLOUR_INDEX_RED     2
+#define LCD_COLOUR_INDEX_GREEN   3
+#define LCD_COLOUR_INDEX_BLUE    4
+#define LCD_COLOUR_INDEX_CYAN    5
+#define LCD_COLOUR_INDEX_MAGENTA 6
+#define LCD_COLOUR_INDEX_YELLOW  7
+#define LCD_COLOUR_INDEX_ORANGE  8
 
 // ==========================================================
-class LCDApplication : public ApplicationBase
+class LCDApplication : public ApplicationBase, public Adafruit_ST7735
 {
 protected:
 
@@ -54,9 +74,7 @@ protected:
 	// Set our default configuration in case EEPROM is un-initialized or
 	// corrupted.
 	virtual void SetDefaultConfiguration (void);
-	
-	// A pointer to the LCD object
-	shen_LCD* TheLCD;
+
 	
 public:
 	// Constructor
@@ -64,7 +82,9 @@ public:
 		unsigned short configOffset,
 		unsigned short supportedProfiles,
 		ProfileBase**  profileList,
-		shen_LCD*      theLCD
+		unsigned       chipSelect,
+        unsigned       dc,
+        unsigned       reset
 		);
 	
 	// Set/Get background colour
@@ -85,4 +105,3 @@ public:
 };
 
 #endif
-

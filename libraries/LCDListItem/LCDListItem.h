@@ -65,11 +65,10 @@ protected:
 	
 public:
 	// Constructor
-	LCDListItem (shen_LCD*       theLCD, 
-		     	char*            theLabel,
-		    	LCDApplication*  theApp,
-		     	char**           theList, 
-		    	unsigned short   numItems);
+	LCDListItem (char*            theLabel,
+		    	 LCDApplication*  theApp,
+		     	 char**           theList, 
+		    	 unsigned short   numItems);
 	
 	// Handle a left button press. This should only be called when we are
 	// in edit mode. We don't use this key.

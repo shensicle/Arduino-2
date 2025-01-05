@@ -35,8 +35,6 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // Make it easier to support LCD modules from different manufacturers
 #include <Wire.h>
 
-#include <shen_LCD.h>
-
 // @@@ 
 #include <LCDApp.h>
 
@@ -77,9 +75,6 @@ protected:
 	// Returns a flag which, when set, indicates that the results of an edit
 	// are valid.
 	virtual bool IsValid (void) = 0;
-	
-	// Pointer to the LCD display object
-	shen_LCD* TheLCD;
 	
 	// Pointer to the application
 	LCDApplication* TheApp;
@@ -127,8 +122,7 @@ protected:
 	
 public:
 	// Constructor
-	LCDItemBase (shen_LCD*            theLCD,
-		         char*                theLabel,
+	LCDItemBase (char*                theLabel,
 		         LCDApplication*      theApp);
 	
 	// Handle a left button press. This should only be called when we are

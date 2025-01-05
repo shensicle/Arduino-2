@@ -53,12 +53,10 @@ protected:
 		
 public:
 	// Constructor  
-	LCDProfileStartupDelayItem  (shen_LCD*            theLCD,
-		         	             char*                theLabel,
+	LCDProfileStartupDelayItem  (char*                theLabel,
 		         	             TimedProfile*        theProfile,
 		         	             LCDApplication*      theApp)
-	: LCDTimeItem  (theLCD,
-		            theLabel, 
+	: LCDTimeItem  (theLabel, 
 		            theApp,
 		            1,           // min value 
 		            86400000,    // max value

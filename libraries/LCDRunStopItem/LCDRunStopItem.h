@@ -56,10 +56,9 @@ protected:
 	
 public:
 	// Constructor
-	LCDRunStopItem (shen_LCD*       theLCD, 
-		        	char*           theLabel,
+	LCDRunStopItem (char*           theLabel,
 		            LCDApplication* theApp)
-	: LCDListItem (theLCD, theLabel, theApp, (char**)Labels, 2), RunIndex(0), StopIndex(1) 
+	: LCDListItem (theLabel, theApp, (char**)Labels, 2), RunIndex(0), StopIndex(1) 
 	  { }		
 };
 

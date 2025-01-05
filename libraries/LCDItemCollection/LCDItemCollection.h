@@ -76,8 +76,7 @@ protected:
 	
 public:
 	// Constructor
-	LCDItemCollection (shen_LCD*       theLCD,
-	                   LCDApplication* theApp,
+	LCDItemCollection (LCDApplication* theApp,
 		               LCDItemBase**   theCollection,
 		               unsigned short  itemsInCollection,
 		               char*           theLabel, 
