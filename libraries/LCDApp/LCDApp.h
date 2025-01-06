@@ -55,6 +55,30 @@ static const short  LCDColourSettings[] = {ST77XX_BLACK , ST77XX_WHITE, ST77XX_R
 #define LCD_COLOUR_INDEX_YELLOW  7
 #define LCD_COLOUR_INDEX_ORANGE  8
 
+// LCD Row and column starts for text display
+#define LCD_DEFAULT_TEXT_SIZE 2
+
+// Where we want text to start
+#define LCD_TEXT_COLUMN 8
+#define LCD_TEXT_ROW_1 5
+#define LCD_TEXT_ROW_2 35
+#define LCD_TEXT_ROW_3 75
+#define LCD_TEXT_ROW_4 105
+
+// Number of pixels between the bottom of a row of text and the cursor
+#define LCD_CURSOR_GAP 2
+
+// This is hard-coded for a text size of 3 - should probably be in LCDApp @@@
+#define LCD_CHAR_WIDTH_PIXELS 12
+#define LCD_CHAR_HEIGHT_PIXELS 16
+#define LCD_DISPLAY_WIDTH_PIXELS 160 - LCD_TEXT_COLUMN
+#define LCD_DISPLAY_HEIGHT_PIXELS 120
+
+const unsigned LCDRowOffsets[] = {LCD_TEXT_ROW_1, 
+                                  LCD_TEXT_ROW_2, 
+                                  LCD_TEXT_ROW_3,
+                                  LCD_TEXT_ROW_4};
+                                  
 // ==========================================================
 class LCDApplication : public ApplicationBase, public Adafruit_ST7735
 {
@@ -98,10 +122,16 @@ public:
 	// Return the hardware setting value for the current foreground and background colours
 	short GetForegroundColourHW (void);
 	short GetBackgroundColourHW(void);
+			
+    // Initialize the LCD display
+    void InitializeDisplay (void);
 				
-	// Called by main loop to update us, mostly so the LCD display gets 
-	// updated
-	virtual void Update (void);
+	// Set text on the title line (first row) of the display
+	void SetTitleLine (char* theString);
+	
+	// Set text on the status line (row 2) of the display
+	void SetStatusLine (char* theString);
+	
 };
 
 #endif

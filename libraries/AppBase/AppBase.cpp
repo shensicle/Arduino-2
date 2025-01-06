@@ -155,7 +155,7 @@ void ApplicationBase::ToggleRunStopState (void)
 }	
 
 // --------------------------------------------------------------------------- 
-// Called by main loop to update us - specifically so LEDs can be updated
+// Called by main loop to update us
 void ApplicationBase::Update (void)
 {
 	// If we're running, update the current program

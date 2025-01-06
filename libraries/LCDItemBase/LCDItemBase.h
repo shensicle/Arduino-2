@@ -38,6 +38,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // @@@ 
 #include <LCDApp.h>
 
+/*
 // LCD Row and column starts for text display
 #define LCD_DEFAULT_TEXT_SIZE 2
 
@@ -61,7 +62,8 @@ const unsigned LCDRowOffsets[] = {LCD_TEXT_ROW_1,
                                   LCD_TEXT_ROW_2, 
                                   LCD_TEXT_ROW_3,
                                   LCD_TEXT_ROW_4};
-                                  
+*/
+              
 // ==================================================================
 class LCDItemBase
 {
@@ -97,15 +99,15 @@ protected:
 	// blanks are added as necessary. Parameter is a null-terminated 
 	// string.Line number defaults to 1 (ie. the second line).
 	// Returns the display column (starting at 0) of the first character in the string.
-	int RenderLineRightJustified (char* theString, 
-		                      unsigned short lineNum = 1);
+	int RenderLineRightJustified (char*          theString, 
+		                          unsigned short lineNum = 1);
 	
 	// Render the specified line of the display center-justified. Leading 
 	// and trailing blanks are added as necessary. Parameter is a 
 	// null-terminated string.Line number defaults to 0 (ie. the first line).
 	// Returns the display column (starting at 0) of the first character in the string.
-	int RenderLineCenterJustified (char* theString, 
-	   	                       unsigned short lineNum = 0);
+	int RenderLineCenterJustified (char*          theString, 
+	   	                           unsigned short lineNum = 0);
 
 		
 	// Display an error when editing fails. Ideally, derived classes will

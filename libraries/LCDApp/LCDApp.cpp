@@ -110,12 +110,37 @@ short LCDApplication::GetBackgroundColourHW(void)
 }
 
 // --------------------------------------------------------------------------- 
-// Called by main loop to update us
-void LCDApplication::Update (void)
+// Initialize the LCD display
+void LCDApplication::InitializeDisplay (void)
 {
-	// If we're running, update the current program
-	if (IsRunning)
-	{
-		IsRunning = ProfileList[CurrentProfile]->Update();
-	}
+    initR(INITR_BLACKTAB);
+    fillScreen(GetBackgroundColourHW());
+    setRotation(1);  // Landscape - change 3 to 1 if display is upside down
+    setTextWrap(false);
+    setTextColor(GetForegroundColourHW());
+    setTextSize(LCD_DEFAULT_TEXT_SIZE);
+}
+				
+// --------------------------------------------------------------------------- 
+// Set text on the title line (first row) of the display
+void LCDApplication::SetTitleLine (char* theString)
+{
+	// @@@ Need to do an erase here
+	
+    setCursor(LCD_TEXT_COLUMN, LCD_TEXT_ROW_1);
+    print(theString);
+}
+	
+// --------------------------------------------------------------------------- 
+// Set text on the status line (row 2) of the display
+void LCDApplication::SetStatusLine (char* theString)
+{
+	// @@@ Need to do an erase here
+
+	// Status line text is smaller
+    setTextSize(1);
+    print(theString);
+    
+    // Put the text size back to default so we don't have to set it every time we do an LCD update'
+    setTextSize(LCD_DEFAULT_TEXT_SIZE);
 }

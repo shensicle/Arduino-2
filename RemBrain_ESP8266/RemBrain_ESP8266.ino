@@ -12,12 +12,6 @@
 #include <ESP8266WiFi.h>
 #endif
 
-// For graphical LCD display
-#include <Adafruit_GFX.h>     // Core graphics library
-#include <Adafruit_ST7735.h>  // Hardware-specific library for ST7735
-//#include <Adafruit_ST7789.h>  // Hardware-specific library for ST7789
-#include <SPI.h>
-
 #include <ProfileBase.h>
 #include <TimedProfile.h>
 #include <CmdParser.h>
@@ -37,7 +31,6 @@
 #include <LCDForegroundColourItem.h>
 #include <LCDCurrentProfileItem.h>
 #include <LCDTimeItem.h>
-//#include <LCDBatteryItem.h> // not supported in ESP8266
 
 #include <LCDItemBase.h>
 #include <LCDItemCollection.h>
@@ -140,48 +133,6 @@ static void ServiceSerialInterface(void)
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------------
-// Read the buttons and return a value representing the button pressed, if any
-unsigned char ReadButtons(void)
-{
-  unsigned char returnValue = 0;
-
-  unsigned short analogValue = analogRead(A0);
-
-
-  if (analogValue < BUTTON_RIGHT_MAX)
-  {
-      Serial.printf ("Right %d\n", analogValue);
-      returnValue = BUTTON_RIGHT;
-  }
-  else if (analogValue < BUTTON_DOWN_MAX)
-  {
-    Serial.printf ("Down %d\n", analogValue);
-     returnValue = BUTTON_DOWN;
-  }
-  else if (analogValue < BUTTON_LEFT_MAX)
-  {
-    Serial.printf ("Left %d\n", analogValue);
-    returnValue = BUTTON_LEFT;
-  }
-  else if (analogValue < BUTTON_UP_MAX)
-  {
-     Serial.printf ("Up %d\n", analogValue);
-     returnValue = BUTTON_UP;
-  }
-  else if (analogValue < BUTTON_SELECT_MAX)
-  {
-      Serial.printf ("Select %d\n", analogValue);
-      returnValue = BUTTON_SELECT;
-  }
-  else
-  {
-    if (analogValue != 1024) Serial.printf("Null %d\n", analogValue);
-  }
-    
-  return (returnValue);
-}
-
-// ----------------------------------------------------------------------------------------------------------------------------------
 void ServiceInputs(void) 
 {
   static unsigned char oldButtons = 0x00;
@@ -221,7 +172,6 @@ void ServiceInputs(void)
       Serial.println ("Unknown key !!");
     }
 
- 
    // Next service the serial port. It is conceivable that buttons will be pressed at the same time as a serial command is issued.
    // If this happens, the buttons will be processed first followed by the serial commands.
    ServiceSerialInterface();
@@ -244,22 +194,28 @@ void setup()
   delay( 1 );  // CPU give up to allow the above to take effect
   #endif
 
-  TheApp.initR(INITR_BLACKTAB);
+  /*TheApp.initR(INITR_BLACKTAB);
   TheApp.fillScreen(TheApp.GetBackgroundColourHW());
   TheApp.setRotation(1);  // Landscape - change 3 to 1 if display is upside down
   TheApp.setTextWrap(false);
   TheApp.setTextColor(TheApp.GetForegroundColourHW());
   TheApp.setTextSize(LCD_DEFAULT_TEXT_SIZE);
-
-  //TheLCD.clear(); // Replace with  TheLCD.fillScreen(ST77XX_BLACK);
+*/
+  TheApp.InitializeDisplay ();
+  
+  /*
   TheApp.setCursor(LCD_TEXT_COLUMN, LCD_TEXT_ROW_1);
-  TheApp.print(F("RemBrain II"));
-  TheApp.setCursor(LCD_TEXT_COLUMN, LCD_TEXT_ROW_2);
+  TheApp.print(F());
+  TheApp.setCursor(LCD_TEXT_COL"RemBrain II"UMN, LCD_TEXT_ROW_2);
+*/
+  TheApp.SetTitleLine("RemBrain II");
 
+  /*
   TheApp.setTextSize(1);
   TheApp.print(F("       Firmware V1.0"));
-
   TheApp.setTextSize(LCD_DEFAULT_TEXT_SIZE);
+  */
+  TheApp.SetStatusLine ("       Firmware V1.0");
 
   TheMenu.OnEntry();
 }
