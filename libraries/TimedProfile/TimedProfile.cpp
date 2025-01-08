@@ -210,7 +210,16 @@ void TimedProfile::Run (void)
 	IsRunning = true;
 }
 	
+// --------------------------------------------------------------
+// Called to make this profile stop
+void TimedProfile::Stop (void)
+{
+	ProfileBase::Stop ();
 	
+	// Ensure that GetProfileString() returns that there has been a change
+	OldRepeatsLeft = 0;
+}
+
 // --------------------------------------------------------------
 // Method called by the controlling program every UpdateInterval 
 // milliseconds to execute the profile. Returns false if profile is

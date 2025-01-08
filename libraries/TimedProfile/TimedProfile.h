@@ -102,6 +102,9 @@ public:
 	
 	// Called to make this profile run
 	virtual void Run (void);
+	
+	// Called to make this profile stop
+	virtual void Stop (void);
 		
 	// Method called by the controlling program every UpdateInterval 
 	// milliseconds to execute the profile. Returns false if profile is
