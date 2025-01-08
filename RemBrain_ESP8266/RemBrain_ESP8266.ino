@@ -194,28 +194,10 @@ void setup()
   delay( 1 );  // CPU give up to allow the above to take effect
   #endif
 
-  /*TheApp.initR(INITR_BLACKTAB);
-  TheApp.fillScreen(TheApp.GetBackgroundColourHW());
-  TheApp.setRotation(1);  // Landscape - change 3 to 1 if display is upside down
-  TheApp.setTextWrap(false);
-  TheApp.setTextColor(TheApp.GetForegroundColourHW());
-  TheApp.setTextSize(LCD_DEFAULT_TEXT_SIZE);
-*/
   TheApp.InitializeDisplay ();
-  
-  /*
-  TheApp.setCursor(LCD_TEXT_COLUMN, LCD_TEXT_ROW_1);
-  TheApp.print(F());
-  TheApp.setCursor(LCD_TEXT_COL"RemBrain II"UMN, LCD_TEXT_ROW_2);
-*/
-  TheApp.SetTitleLine("RemBrain II");
 
-  /*
-  TheApp.setTextSize(1);
-  TheApp.print(F("       Firmware V1.0"));
-  TheApp.setTextSize(LCD_DEFAULT_TEXT_SIZE);
-  */
-  TheApp.SetStatusLine ("       Firmware V1.0");
+  TheApp.SetTitleLine(" RemBrain II");
+  TheApp.SetStatusLine ("   Firmware v 2.0");
 
   TheMenu.OnEntry();
 }
@@ -230,14 +212,8 @@ void loop() {
   // Tell the application to update its processing elements.
   TheApp.Update();
 
-  // Update the Vcc monitor
-  // VoltageMonitor.Update ();
-
   // Check all inputs to see if user is requesting we do something
   ServiceInputs();
-
-  // Analog read test only
-  //Serial.println(analogRead(A0));
 
   unsigned long endTime = millis();
 
