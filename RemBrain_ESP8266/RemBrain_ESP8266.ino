@@ -197,7 +197,7 @@ void setup()
   TheApp.InitializeDisplay ();
 
   TheApp.SetTitleLine(" RemBrain II");
-  TheApp.SetStatusLine ("   Firmware v 2.0");
+  TheApp.SetStatusLine ("   Firmware 2.0");
 
   TheMenu.OnEntry();
 }
