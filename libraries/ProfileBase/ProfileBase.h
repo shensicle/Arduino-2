@@ -80,7 +80,15 @@ public:
 	// Method called by the controlling program every UpdateInterval 
 	// milliseconds to execute the profile. Returns false if profile is
 	// done running and true if profile can continue to run.
+	// Copy a status string into returnString (maxLen-1 characters) while running so it can be
+	// displayed on whatever output device.
 	virtual bool Update (void) = 0;
+	
+	// Copy a status string into returnString (maxLen-1 characters) while running so it can be
+	// displayed on whatever output device. Sets returnString to null if profile is not running.
+	// Returns true if returnString has changed since the last time this function wass
+	// called and false otherwise.
+	virtual bool GetStatusString (char* returnString, unsigned char maxLen) = 0;
 };
 
 #endif

@@ -125,7 +125,12 @@ void LCDApplication::InitializeDisplay (void)
 // Set text on the title line (first row) of the display
 void LCDApplication::SetTitleLine (char* theString)
 {
-	// @@@ Need to do an erase here
+	// Erase
+	fillRect(LCD_TEXT_COLUMN, 
+			 LCD_TEXT_ROW_1, 
+			 LCD_DISPLAY_WIDTH_PIXELS, 
+			 LCD_CHAR_HEIGHT_PIXELS, 
+			 GetBackgroundColourHW());
 	
     setCursor(LCD_TEXT_COLUMN, LCD_TEXT_ROW_1);
     print(theString);
@@ -135,8 +140,14 @@ void LCDApplication::SetTitleLine (char* theString)
 // Set text on the status line (row 2) of the display
 void LCDApplication::SetStatusLine (char* theString)
 {
-	// @@@ Need to do an erase here
-
+	// Erase
+	fillRect(LCD_TEXT_COLUMN, 
+	         LCD_TEXT_ROW_2, 
+	         LCD_DISPLAY_WIDTH_PIXELS, 
+	         LCD_CHAR_HEIGHT_PIXELS, 
+	         GetBackgroundColourHW());
+    setCursor(LCD_TEXT_COLUMN, LCD_TEXT_ROW_2);
+    
 	// Status line text is smaller
     setTextSize(1);
     print(theString);
@@ -144,3 +155,24 @@ void LCDApplication::SetStatusLine (char* theString)
     // Put the text size back to default so we don't have to set it every time we do an LCD update'
     setTextSize(LCD_DEFAULT_TEXT_SIZE);
 }
+
+// --------------------------------------------------------------------------- 
+// Called by main loop to update us - specifically so LEDs can be updated
+void LCDApplication::Update (void)
+{
+    ApplicationBase::Update();
+    
+	static char statusString[LCD_DISPLAY_WIDTH_PIXELS / LCD_CHAR_WIDTH_PIXELS] = "   To go: ";
+    
+
+    if (ProfileList[CurrentProfile]->GetStatusString (
+    	                           &statusString [10], 
+    	                           LCD_DISPLAY_WIDTH_PIXELS / LCD_CHAR_WIDTH_PIXELS - 1) == true)
+    {
+    	if (IsRunning)
+			SetStatusLine (statusString);
+    	else
+    		SetStatusLine ("   Stand by");
+    }
+}
+	

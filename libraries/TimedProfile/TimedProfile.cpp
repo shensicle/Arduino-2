@@ -87,6 +87,9 @@ TimedProfile::TimedProfile (
 			WriteConfig (&Configuration, sizeof (Configuration));
 		}
 	}
+	
+	// Value to force GetStatusString() to return a new value first time it is called
+	OldRepeatsLeft = 0;
 }
 
 	
@@ -322,4 +325,30 @@ void TimedProfile::SetShutterClosedInterval (unsigned long theInterval)
 	WriteConfig(&Configuration, sizeof (Configuration));
 }
 	
+// --------------------------------------------------------------
+// Copy a status string into returnString (maxLen-1 characters) while running so it can be
+// displayed on whatever output device. It is up to the caller to decide whether or not to use
+// returnString if the profile is not currently running.
+// Returns true if returnString has changed since the last time this function wass
+// called and false otherwise.
+bool TimedProfile::GetStatusString (char* returnString, unsigned char maxLen)
+{
+	bool returnValue = false;
 
+	
+	// Create the status string. Do this regardless of whether or not it has changed since last time
+	// for scrolling devices such as the serial terminal
+	if (IsRunning)
+		snprintf (returnString, maxLen-1, "%u", RepeatsLeft);
+	else
+		snprintf (returnString, maxLen-1, "Stand by");
+	
+	// if the number of repeats left (that's what we return) has changed since last time, update
+	// the return string 
+	if (RepeatsLeft != OldRepeatsLeft)
+	{
+		OldRepeatsLeft = RepeatsLeft;
+		returnValue = true;
+	}
+	return (returnValue);
+}

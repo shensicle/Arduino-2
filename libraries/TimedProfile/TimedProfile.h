@@ -61,13 +61,18 @@ protected:
 	// Number of repeats we have left in the current run cycle
 	unsigned short RepeatsLeft;
 	
+	// Used by GetStatusString() to determine whether or not the status string has
+	// changed since the last time it was called. This is used to return a flag to the
+	// caller to indicate whether or not a display needs to be updated.
+	unsigned short OldRepeatsLeft;
+
 	// Set the default configuration values
 	void SetDefaultConfiguration (void);
 	
 	// Return a boolean indicating whether or not the current configuration
 	// is valid
 	bool ConfigurationIsValid (timed_profile_config_struct* theConfig);
-	
+		
 public:
 	TimedProfile (
 		TwoStateOutput* theRelay,
@@ -101,8 +106,16 @@ public:
 	// Method called by the controlling program every UpdateInterval 
 	// milliseconds to execute the profile. Returns false if profile is
 	// done running and true if profile can continue to run.
+	// Copy a status string into returnString (maxLen-1 characters) while running so it can be
+	// displayed on whatever output device. Return string is set to Null if profile is not running
 	virtual bool Update (void);
 
+	// Copy a status string into returnString (maxLen-1 characters) while running so it can be
+	// displayed on whatever output device. It is up to the caller to decide whether or not to use
+	// returnString if the profile is not currently running.
+	// Returns true if returnString has changed since the last time this function wass
+	// called and false otherwise.
+	virtual bool GetStatusString (char* returnString, unsigned char maxLen);
 };
 
 #endif

@@ -104,7 +104,6 @@ public:
 	// allows for a single button press to stop or start.
 	void ToggleRunStopState (void);	
 
-		
 	// Called by main loop to update us - specifically so LEDs can be updated
 	virtual void Update (void);
 	

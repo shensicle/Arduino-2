@@ -132,6 +132,10 @@ public:
 	// Set text on the status line (row 2) of the display
 	void SetStatusLine (char* theString);
 	
+	// Called by main loop to update us - specifically so LEDs can be updated
+    virtual void Update (void);
+
+	
 };
 
 #endif
