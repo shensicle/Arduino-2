@@ -203,7 +203,8 @@ void setup()
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------------
-void loop() {
+void loop() 
+{
 
   // To keep the timing consistent, we subtract the time each loop takes to execute from the
   // delay until the beginning of the next loop.
