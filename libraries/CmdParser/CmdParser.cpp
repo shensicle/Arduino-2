@@ -1,5 +1,5 @@
 /*
-Copyright © 2011 Scott Henwood/shensicle photographic. All Rights Reserved.
+Copyright ï¿½ 2011 Scott Henwood/shensicle photographic. All Rights Reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -151,5 +151,55 @@ char CmdParser::GetChar (void)
 		returnValue = StringPtr->charAt(CurrPos++);
 
 	return (returnValue);
+}
+
+// --------------------------------------------------------------
+// Return a string of length up to maxLen after skipping over leading whitespace and stopping at
+// trailing whitespace. Return 0x00 if there is
+// no string on the command line.
+void CmdParser::GetStringToWhitespace (char* theResult, unsigned maxLen)
+{
+    SkipWhitespace ();
+    
+    bool done = false;
+    int i = 0;
+    theResult[0] = 0x00; // Null-terminate response for case where there is no string
+        
+    while ((CurrPos < StringPtr->length()) && (i < maxLen) && (done == false))
+    {
+        if (isSpace(StringPtr->charAt(CurrPos)))
+        {
+             // We're done, terminate the result string and leave
+             theResult[i] = 0x00;
+             done = true;
+        }
+        else
+        {
+             // Copy this character into our result string and move to next
+             theResult[i++] = StringPtr->charAt(CurrPos++);
+         }
+     }      
+}
+
+// --------------------------------------------------------------
+// Method to return a command and its parameter. Returns 0x00 for
+// theCommand if either the command or the parameter are missing. 
+// Does not validate parameters.
+char CmdParser::GetCommandAndParameter (char* theParameter, unsigned maxParamLen)
+{
+    char theCommand = GetCommand();
+    
+    // If there is a command ...
+    if (theCommand != 0x00)
+    {
+        GetStringToWhitespace (theParameter, maxParamLen);
+        
+        // If there was no parameter, set the command back to 0x00
+        if (theParameter[0] == 0x00)
+        {
+            theCommand = 0x00;
+        }
+    }
+    return (theCommand);
 }
 
